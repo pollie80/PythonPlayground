@@ -15,6 +15,7 @@ except AttributeError:
 else:
     ssl._create_default_https_context = _create_unverified_https_context
 
+
 def load_data():
     nltk.download('movie_reviews')
     docs = [(list(movie_reviews.words(fileid)), category)
@@ -79,6 +80,19 @@ def display_results(dataset_name, accuracy, precision, recall, f1):
     print(f'  F1-score: {f1:.4f}\n')
 
 
+def process_input(text, vectorizer, tfidf_transformer):
+    text = ' '.join(nltk.word_tokenize(text.lower()))
+    X_counts = vectorizer.transform([text])
+    X_tfidf = tfidf_transformer.transform(X_counts)
+    return X_tfidf
+
+
+def predict_sentiment(loaded_model, text, vectorizer, tfidf_transformer):
+    processed_input = process_input(text, vectorizer, tfidf_transformer)
+    prediction = loaded_model.predict(processed_input)
+    return prediction[0]
+
+
 if __name__ == "__main__":
     docs = load_data()
     processed_docs = preprocess_data(docs)
@@ -99,3 +113,15 @@ if __name__ == "__main__":
     # Display the results
     display_results('Validation', val_accuracy, val_precision, val_recall, val_f1)
     display_results('Test', test_accuracy, test_precision, test_recall, test_f1)
+
+    # Initialize vectorizer and transformer for user input
+    vectorizer = CountVectorizer(stop_words='english')
+    vectorizer.fit([' '.join(doc) for doc, _ in docs])  # Fit the vectorizer on the `docs` dataset
+    tfidf_transformer = TfidfTransformer()
+    tfidf_transformer.fit(X)
+
+    # Get user input and predict its sentiment
+    while True:
+        user_input = input("Enter a text to analyze its sentiment: ")
+        sentiment = predict_sentiment(loaded_model, user_input, vectorizer, tfidf_transformer)
+        print(f"The sentiment of the given text is: {sentiment}")
