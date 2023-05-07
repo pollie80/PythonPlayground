@@ -2,3 +2,7 @@
 .DS_Store
 
 PythonSnakeGame/.idea/
+
+SentimentAIModel/.idea/
+
+SentimentAIModel/sentiment_analysis_model.joblib
