@@ -6,3 +6,10 @@ PythonSnakeGame/.idea/
 SentimentAIModel/.idea/
 
 SentimentAIModel/sentiment_analysis_model.joblib
+/venv/
+
+.idea/
+
+*.joblib
+
+*.model

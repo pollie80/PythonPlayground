@@ -21,6 +21,7 @@ def load_data():
     docs = [(list(movie_reviews.words(fileid)), category)
             for category in movie_reviews.categories()
             for fileid in movie_reviews.fileids(category)]
+    print("dataset size: ", len(docs))
     return docs
 
 
