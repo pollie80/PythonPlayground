@@ -13,3 +13,7 @@ SentimentAIModel/sentiment_analysis_model.joblib
 *.joblib
 
 *.model
+
+GenericNLPModel/pyvenv.cfg
+
+*.pkl
