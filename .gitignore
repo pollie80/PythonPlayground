@@ -17,3 +17,5 @@ SentimentAIModel/sentiment_analysis_model.joblib
 GenericNLPModel/pyvenv.cfg
 
 *.pkl
+/data/twitter_validation.csv
+/data/twitter_training.csv

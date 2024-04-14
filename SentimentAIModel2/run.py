@@ -49,8 +49,8 @@ def preprocess_text(text):
 
 
 # Load your data
-train_df = pd.read_csv('../SentimentAIModel/data/twitter_training.csv')
-validation_df = pd.read_csv('../SentimentAIModel/data/twitter_validation.csv')
+train_df = pd.read_csv('../data/twitter_training.csv')
+validation_df = pd.read_csv('../data/twitter_validation.csv')
 
 # Preprocess your data (this will vary depending on your data)
 train_df['processed_text'] = train_df['text'].apply(preprocess_text)
