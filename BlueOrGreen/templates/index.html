@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Classifier</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    input, button { padding: 10px; font-size: 16px; }
+    #result { margin-top: 20px; }
+</style>
+</head>
+<body>
+    <h1>Hex Color Classifier</h1>
+    <input type="text" id="hexColor" placeholder="#00FF00">
+    <button onclick="classifyColor()">Classify Color</button>
+    <div id="result"></div>
+
+    <script>
+        function classifyColor() {
+            const hexColor = document.getElementById('hexColor').value;
+            fetch('/classify_color', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ hexColor: hexColor })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerHTML = `The color ${hexColor} is predominantly <strong>${data.color}</strong>.`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
